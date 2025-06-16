@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+class employee{
+private:
+    int id;
+    float b;
+    float h[100];
+    int y[100];
+    int j;
+
+    public:
+    employee(){}
+
+    void setdata(int id,float b,float h[], int y[],int j){
+    this->id=id;
+    this->b=b;
+
+    this->j=j;
+    for(int i=0;i<j;i++)
+    {
+
+    this->h[i]=h[i];
+    this->y[i]=y[i];
+    }
+
+
+    }
+    void display(){
+        int i;
+        cout<<"An employee with"<<id<<"has received rs"<<b<<" as a bonus and had worked";
+        for (i=0;i<j;i++)
+        {
+          cout<<h[i];
+          cout<<"\t";
+
+        }
+       cout<<"hours as overtime in year"<<endl;
+        for (i=0;i<j;i++)
+        {
+          cout<<y[i];
+          cout<<"\t";
+
+        }
+
+   /*An employee with ... ... ... has received Rs ... ... ...as a bonus
+
+and
+
+had worked ... ... ... hours as overtime in the year ... ... ...*/
+    }
+
+
+
+};
+int main(){
+    int n;
+    int id,y[100];
+    float b,h[100];
+    char ch;
+
+    cout<<"enter the no of employee"<<endl;
+    cin>>n;
+    employee e[100];
+    for(int i=0;i<n;i++){
+            int j=0;
+
+        cout<<"enterthe employee id";
+        cin>>id;
+        cout<<"enter the bonus :";
+        cin>>b;
+        do{
+        cout<<"enter the overtime in hours:"<<endl;
+        cin>>h[j];
+        cout<<"enter the year of overtime:"<<endl;
+        cin>>y[j];
+        cout<<"does this employee had worked overtime in other years:"<<endl;
+        cin>>ch;
+        j++;
+
+        }while(ch=='y'||ch=='Y');
+
+        e[i].setdata(id,b,h,y,j);
+
+    }
+    for(int i=0;i<n;i++){
+              e[i].display();
+    }
+
+    }
+
+
+
+
+
