@@ -1,0 +1,111 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// ======= Class for Circle =======
+class Circle {
+private:
+    float radius;
+
+public:
+    void read() {
+        cout << "\nEnter radius of circle: ";
+        cin >> radius;
+    }
+
+    void display() {
+        cout << "Circle -> Radius: " << radius << endl;
+    }
+
+    float area() {
+        return 3.1416 * radius * radius;
+    }
+
+    float perimeter() {
+        return 2 * 3.1416 * radius;
+    }
+};
+
+// ======= Class for Rectangle =======
+class Rectangle {
+private:
+    float length, width;
+
+public:
+    void read() {
+        cout << "\nEnter length and width of rectangle: ";
+        cin >> length >> width;
+    }
+
+    void display() {
+        cout << "Rectangle -> Length: " << length << ", Width: " << width << endl;
+    }
+
+    float area() {
+        return length * width;
+    }
+
+    float perimeter() {
+        return 2 * (length + width);
+    }
+};
+
+// ======= Class for Triangle =======
+class Triangle {
+private:
+    float a, b, c;
+
+public:
+    void read() {
+        cout << "\nEnter three sides of triangle: ";
+        cin >> a >> b >> c;
+    }
+
+    void display() {
+        cout << "Triangle -> Sides: " << a << ", " << b << ", " << c << endl;
+    }
+
+    float perimeter() {
+        return a + b + c;
+    }
+
+    float area() {
+        float s = perimeter() / 2;
+        return sqrt(s * (s - a) * (s - b) * (s - c)); // Heron's formula
+    }
+
+    bool isValid() {
+        return (a + b > c && a + c > b && b + c > a);
+    }
+};
+
+// ======= Main Function =======
+int main() {
+    Circle c;
+    Rectangle r;
+    Triangle t;
+
+    // Circle
+    c.read();
+    c.display();
+    cout << "Area of Circle: " << c.area() << endl;
+    cout << "Perimeter of Circle: " << c.perimeter() << endl;
+
+    // Rectangle
+    r.read();
+    r.display();
+    cout << "Area of Rectangle: " << r.area() << endl;
+    cout << "Perimeter of Rectangle: " << r.perimeter() << endl;
+
+    // Triangle
+    t.read();
+    if (t.isValid()) {
+        t.display();
+        cout << "Area of Triangle: " << t.area() << endl;
+        cout << "Perimeter of Triangle: " << t.perimeter() << endl;
+    } else {
+        cout << "Invalid triangle dimensions!" << endl;
+    }
+
+    return 0;
+}
