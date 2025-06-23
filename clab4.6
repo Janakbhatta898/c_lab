@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+class Item {
+private:
+    int serialNumber;
+    static int count;
+
+public:
+    Item() {
+        serialNumber = ++count;
+        cout << "Object " << serialNumber << " created" << endl;
+    }
+
+    void showSerial()  {
+        cout << "Serial Number: " << serialNumber << endl;
+    }
+
+    static int getTotalObjects() {
+        return count;
+    }
+};
+
+int Item::count = 0;
+
+int main() {
+    Item a, b, c;
+
+    a.showSerial();
+    b.showSerial();
+    c.showSerial();
+
+    cout << "Total objects created" << Item::getTotalObjects() << endl;
+
+    return 0;
+}
