@@ -1,0 +1,41 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class concatenate{
+	private:
+		string str;
+		public:
+			concatenate(){
+				str="";
+			}
+			void getdata(){
+				cout<<"enter the line"<<endl;
+				getline(cin,str);
+				
+			}
+			concatenate join(concatenate a,concatenate b){
+				
+				str=a.str+b.str;
+				cout<<str;
+			}
+			void display(){
+				cout<<str;
+			}
+            ~concatenate(){
+           
+            	
+			}
+			
+				
+			
+};
+int main(){
+	concatenate o1;
+	o1.getdata();
+    concatenate o2;
+    o2.getdata();
+    concatenate o3;
+    o3.join(o1,o2);
+    o3.display();
+    
+}
