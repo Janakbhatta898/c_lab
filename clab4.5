@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+class Test {
+private:
+    int value;
+
+public:
+    Test(int v) { value = v; }
+
+    void nonConstFunc() {
+        cout << "Non-const member function called. Value = " << value << endl;
+    }
+
+    void constFunc() const {
+        cout << "Const member function called. Value = " << value << endl;
+    }
+};
+
+int main() {
+    Test obj1(10);
+    const Test obj2(20);
+
+    // obj2.nonConstFunc();   // Invalid: would cause error
+
+    obj2.constFunc();
+    obj1.nonConstFunc();
+    obj1.constFunc();
+
+    return 0;
+}
