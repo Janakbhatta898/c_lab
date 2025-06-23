@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+class time{
+private:
+int hours;
+int minutes;
+int seconds;
+public:
+time(){
+    hours=0;
+    minutes=0;
+    seconds=0;
+}
+void getdata(){
+    cout<<"enter the hours"<<endl;
+    cin>>hours;
+    cout<<"enter the minutes"<<endl;
+    cin>>minutes;
+    cout<<"enter the seconds"<<endl;
+    cin>>seconds;
+
+}
+time operator +(time t)
+{
+time result;
+result.hours=hours+t.hours;
+result.minutes=minutes+t.minutes;
+result.seconds=seconds+t.seconds;
+
+if (result.seconds>60){
+	result.minutes=result.minutes+result.seconds/60;
+	result.seconds=result.seconds%60;
+}
+
+
+if (result.minutes>60){
+	result.hours=result.hours+result.minutes/60;
+	result.minutes=result.minutes%60;
+}
+ return result;
+
+}
+void display24hrformat(){
+	
+	cout<<hours<<":"<<minutes<<":"<<seconds<<endl;
+}
+void display_12_hr_format(){
+	if(hours>12){
+		cout<<"PM:"<<hours%12<<":"<<minutes<<":"<<seconds<<endl;
+	}
+	else{
+			cout<<"AM:"<<hours%12<<":"<<minutes<<":"<<seconds<<endl;
+	}
+}
+
+
+};
+int main(){
+    time t1;
+    t1.getdata();
+    time t2;
+    t2.getdata();
+    time t3=t1+t2;
+    t3.display24hrformat();
+    t3.display_12_hr_format();
+    
+    
+    
+
+}
