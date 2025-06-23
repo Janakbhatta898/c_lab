@@ -1,0 +1,54 @@
+#include<iostream>
+using namespace std;
+class details{
+	/*Assume that one constructor initializes data member say num_vehicle, hour, and rate. There should be a 10% discount if num_vehicle exceeds 10.
+	 Display the total charge. Use two objects and show a bit-by-bit copy of one object to another (make your own copy constructor).*/
+	 private:
+	 	int num;
+		 float hours;
+		 float rate;
+		 float total_amount;
+		 public:
+		 	details(){
+		 		
+			 }
+		 	
+		 void getdetails(){
+		 	cout<<"enter the vechicle number:"<<endl;
+		 	cin>>num;
+		 	cout<<"enter the time in hours\n";
+		 	cin>>hours;
+		 	cout<<"enter the rate\n";
+		 	cin>>rate;
+		 	
+		 }
+		 void calculate(){
+		 	total_amount=rate*hours;
+		 	if(num>10){
+		 		total_amount=0.9*total_amount;
+		 		
+			 }
+		}
+			 details(details& c){
+			 	num=c.num;
+			 	hours=c.hours;
+			 	rate=c.rate;
+			 	total_amount=c.total_amount;
+			 	
+			 }
+		void display(){
+			cout<<"total amount of vechicle "<<num<<" is "<<total_amount<<endl;
+		}
+		  
+	 	
+};
+int main(){
+	details c1;
+	c1.getdetails();
+	c1.calculate();
+	details	c2=c1;
+	//details c2(c1);
+
+	c2.display();
+	
+}
