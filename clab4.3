@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Department {
+private:
+    int deptID;
+    string deptName;
+    int objectNumber;  
+static int count;
+
+public:
+   
+    Department(int id, string name) {
+        deptID = id;
+        deptName = name;
+        objectNumber = ++count;
+
+        cout << "Constructor invoked for Object " << objectNumber << endl;
+        cout << "Department ID " << deptID << " Name " << deptName << endl;
+    }
+
+    
+    ~Department() {
+        cout << "Object " << objectNumber << " goes out of the scope" << endl;
+    }
+};
+
+
+int Department::count = 0;
+
+
+int main() {
+    
+        Department d1(420, "electronics and computer enginering");
+        Department d2(365, "Electrical Engineering");
+
+    
+            Department d3(999, "Mechanical Engineering");
+       
+
+    return 0;
+}
