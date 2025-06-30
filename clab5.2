@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+class Point3D {
+public:
+    double x, y, z;
+    Point3D(double a = 0, double b = 0, double c = 0) {
+        x = a;
+        y = b;
+        z = c;
+    }
+    void show() {
+        cout << "(" << x << ", " << y << ", " << z << ")" << endl;
+    }
+};
+Point3D operator+(Point3D p1, Point3D p2) {
+    Point3D result;
+    result.x = p1.x + p2.x;
+    result.y = p1.y + p2.y;
+    result.z = p1.z + p2.z;
+    return result;
+}
+
+
+Point3D operator-(Point3D p1, Point3D p2) {
+    Point3D result;
+    result.x = p1.x - p2.x;
+    result.y = p1.y - p2.y;
+    result.z = p1.z - p2.z;
+    return result;
+}
+
+int main() {
+    Point3D pointA(-11, 7, 5.24);
+    Point3D pointB(4, 9.9, 3.2);
+    Point3D pointC = pointA + pointB;
+    cout << "Addition result: ";
+    pointC.show();
+    Point3D pointD = pointA - pointB;
+    cout << "Subtraction result: ";
+    pointD.show();
+
+    return 0;
+}
