@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+class Date {
+    int dd, mm, yy;
+
+public:
+  
+    Date(int d, int m, int y) {
+        dd = d;
+        mm = m;
+        yy = y;
+    }
+
+   
+    bool leapYear() {
+        return ( (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0) );
+    }
+
+    int totalDays() {
+        if (mm == 2) {
+            return leapYear() ? 29 : 28;
+        }
+        else if (mm == 4 || mm == 6 || mm == 9 || mm == 11) {
+            return 30;
+        }
+        else {
+            return 31;
+        }
+    }
+
+    // Show the date
+    void showDate() {
+        cout << dd << "-" << mm << "-" << yy << endl;
+    }
+
+    // Prefix increment
+    Date& operator++() {
+        dd++;
+        if (dd > totalDays()) {
+            dd = 1;
+            mm++;
+            if (mm > 12) {
+                mm = 1;
+                yy++;
+            }
+        }
+        return *this;
+    }
+
+
+    Date operator++(int) {
+        Date temp = *this;
+        ++(*this); 
+        return temp;
+    }
+};
+
+
+int main() {
+    Date today(31, 12, 2023);
+
+    cout << "Current Date: ";
+    today.showDate();
+
+    ++today; 
+    cout << "After Prefix ++ : ";
+    today.showDate();
+
+    today++; 
+    cout << "After Postfix ++ : ";
+    today.showDate();
+
+    return 0;
+}
