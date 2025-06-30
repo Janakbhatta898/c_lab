@@ -1,1 +1,33 @@
 
+#include <iostream>
+using namespace std;
+
+class Number {
+    int value;
+public:
+    Number(int v = 0) : value(v) {}
+
+    bool operator==(Number other) { return value == other.value; }
+    bool operator!=(Number other) { return value != other.value; }
+    bool operator<(Number other)  { return value < other.value; }
+    bool operator>(Number other)  { return value > other.value; }
+    bool operator<=(Number other) { return value <= other.value; }
+    bool operator>=(Number other) { return value >= other.value; }
+
+    void show() { cout << value; }
+};
+
+int main() {
+    Number a(10), b(20);
+
+    cout << "a = "; a.show(); cout << ", b = "; b.show(); cout << "\n\n";
+
+    cout << "a == b: " << (a == b) << endl;
+    cout << "a != b: " << (a != b) << endl;
+    cout << "a < b: " << (a < b) << endl;
+    cout << "a > b: " << (a > b) << endl;
+    cout << "a <= b: " << (a <= b) << endl;
+    cout << "a >= b: " << (a >= b) << endl;
+
+    return 0;
+}
