@@ -1,0 +1,89 @@
+#include<iostream>
+using namespace std;
+
+class coordinates;
+
+class calculation {
+    public:
+    coordinates sum(coordinates,coordinates);
+    void show(coordinates,coordinates);
+};
+
+class coordinates {
+    float x,y;
+
+    public:
+    coordinates(float a=0,float b=0) {
+        x=a;
+        y=b;
+    }
+
+    void display() {
+        cout<<"("<<x<<","<<y<<")"<<endl;
+    }
+
+    friend coordinates calculation::sum(coordinates,coordinates);
+    friend class calculation;
+    friend coordinates multiply(coordinates,coordinates);
+    friend coordinates divide(coordinates,coordinates);
+    friend coordinates subtract(coordinates,coordinates);
+};
+
+coordinates calculation::sum(coordinates p1,coordinates p2) {
+    coordinates temp;
+    temp.x=p1.x + p2.x;
+    temp.y=p1.y + p2.y;
+    return temp;
+}
+
+void calculation::show(coordinates p1,coordinates p2) {
+    cout<<"Sum X="<<p1.x+p2.x<<endl;
+    cout<<"Sum Y="<<p1.y+p2.y<<endl;
+}
+
+coordinates multiply(coordinates p1,coordinates p2) {
+    coordinates temp;
+    temp.x=p1.x*p2.x;
+    temp.y=p1.y*p2.y;
+    return temp;
+}
+
+coordinates divide(coordinates p1,coordinates p2) {
+    coordinates temp;
+    temp.x=p1.x/p2.x;
+    temp.y=p1.y/p2.y;
+    return temp;
+}
+
+coordinates subtract(coordinates p1,coordinates p2) {
+    coordinates temp;
+    temp.x=p1.x-p2.x;
+    temp.y=p1.y-p2.y;
+    return temp;
+}
+
+int main() {
+    coordinates a(4,6);
+    coordinates b(2,3);
+    calculation c;
+
+    cout<<"Point A:"; a.display();
+    cout<<"Point B:"; b.display();
+
+    coordinates s=c.sum(a,b);
+    cout<<"Sum:"; s.display();
+
+    coordinates m=multiply(a,b);
+    cout<<"Multiply:"; m.display();
+
+    coordinates d=divide(a,b);
+    cout<<"Divide:"; d.display();
+
+    coordinates sub=subtract(a,b);
+    cout<<"Subtraction:"; sub.display();
+
+    cout<<"Friend class access:"<<endl;
+    c.show(a,b);
+
+    return 0;
+}
