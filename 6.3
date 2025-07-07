@@ -1,51 +1,91 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 using namespace std;
-class instrument{
-  protected:
 
-    void strin(){
-        cout<<"the instrument inside string"<<endl;
-        cout<<"veena, guitar, sitar, sarod and mandolin "<<endl;
+class Musicians {
+protected:
+    string str[5];
+    string wnd[5];
+    string prc[5];
+
+    void stringInstruments() {
+        str[0] = "Veena";
+        str[1] = "Guitar";
+        str[2] = "Sitar";
+        str[3] = "Sarod";
+        str[4] = "Mandolin";
+
+        cout << "\nString Instruments:\n";
+        for (int i = 0; i < 5; ++i)
+            cout << str[i] << endl;
     }
-    void wind(){
-        cout<<"the instrument inside wind"<<endl;
-        cout<<"flute, clarinet saxophone, nadhaswaram, and piccolo "<<endl;
 
+    void windInstruments() {
+        wnd[0] = "Flute";
+        wnd[1] = "Clarinet";
+        wnd[2] = "Saxophone";
+        wnd[3] = "Nadhaswaram";
+        wnd[4] = "Piccolo";
 
+        cout << "\nWind Instruments:\n";
+        for (int i = 0; i < 5; ++i)
+            cout  << wnd[i] << endl;
     }
-    void perc(){
-        cout<<"the instrument inside perc"<<endl;
-        cout<<" tabla, mridangam, bangos, drums and tambour "<<endl;
 
+    void percInstruments() {
+        prc[0] = "Tabla";
+        prc[1] = "Mridangam";
+        prc[2] = "Bangos";
+        prc[3] = "Drums";
+        prc[4] = "Tambour";
+
+        cout << "\nPercussion Instruments:\n";
+        for (int i = 0; i < 5; ++i)
+            cout << "- " << prc[i] << endl;
     }
 
-
+public:
+    
 };
-class trial: public instrument {
-    public:
-      string c;
-    void set(){
 
-        strin();wind();
-        perc();
+class TypeIns : public Musicians {
+private:
+    char choice;
 
-    }
-    void show(){
-        string c;
-        cout<<"which category you want to see(stirng,wind and perc)"<<endl;
-        cin>>c;
-        if(c=="string")strin();
-        else if(c=="wind")wind();
-         else if(c=="perc")perc();
-
-
+public:
+    void get() {
+        cout << "Type of instruments to be displayed\n";
+        cout << "a. String instruments\n";
+        cout << "b. Wind instruments\n";
+        cout << "c. Percussion instruments\n";
+        cout << "Enter your choice (a/b/c): ";
+        cin >> choice;
     }
 
+    void show() {
+        switch (choice) {
+            case 'a':
+            case 'A':
+                stringInstruments();
+                break;
+            case 'b':
+            case 'B':
+                windInstruments();
+                break;
+            case 'c':
+            case 'C':
+                percInstruments();
+                break;
+            default:
+                cout << "Invalid choice. Please enter a, b, or c.\n";
+        }
+    }
 };
-int main(){
-    instrument i;
-    trial t;
-    t.set();
+
+int main() {
+    TypeIns t;
+    t.get();
     t.show();
+    return 0;
 }
+
