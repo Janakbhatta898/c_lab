@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+class distanc{
+    private:
+    int m;
+    int cm;
+    public:
+    distanc (int x=0, int y=0){
+        m=x;
+        cm=y;
+
+    }
+    distanc (float totaldistance )
+
+    {
+
+        m=static_cast<int>(totaldistance);
+        cm=static_cast<int>((totaldistance-m)*100);
+
+
+    }
+    operator float(){
+    return m+(cm)/100.f;
+    }
+
+    void show()
+
+{
+    cout<<"m="<<m<<endl;
+    cout<<"cm="<<cm;
+
+}
+
+};
+int main(){
+
+  distanc d1(1,20);
+  float value=d1;
+  cout<<"the float is:"<<value<<endl;
+  distanc d2(1.2f);
+
+
+  d2.show();
+
+
+
+
+}
+
