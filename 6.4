@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+
+class Person {
+string name;
+int age;
+public:
+void askdata(){
+cout<<"Name: ";
+cin>>name;
+cout<<"Age: ";
+cin>>age;
+}
+void showaddr(){
+cout<<"Person address: "<<this<<endl;
+}
+};
+
+class Student:public Person{
+int roll;
+public:
+void setstud(){
+askdata();
+cout<<"Roll: ";
+cin>>roll;
+}
+void showaddr(){
+cout<<"Student address: "<<this<<endl;
+}
+};
+
+class Employee:public Person{
+int empid;
+public:
+void setemp(){
+askdata();
+cout<<"EmpID: ";
+cin>>empid;
+}
+void showaddr(){
+cout<<"Employee address: "<<this<<endl;
+}
+};
+
+int main(){
+Person p1,p2;
+Student s1,s2;
+Employee e1,e2;
+
+p1.askdata();
+p2.askdata();
+s1.setstud();
+s2.setstud();
+e1.setemp();
+e2.setemp();
+
+p1.showaddr();
+p2.showaddr();
+s1.showaddr();
+s2.showaddr();
+e1.showaddr();
+e2.showaddr();
+
+cout<<"Person size: "<<sizeof(Person)<<endl;
+cout<<"Student size: "<<sizeof(Student)<<endl;
+cout<<"Employee size: "<<sizeof(Employee)<<endl;
+
+return 0;
+}
