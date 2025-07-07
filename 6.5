@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+
+class ComplexBase {
+protected:
+    int real1, imag1;
+public:
+    void getComplex(){
+        cout<<"Base Complex Number (real imag): ";
+        cin>>real1>>imag1;
+    }
+};
+
+class ComplexDerived : public ComplexBase {
+    int real2, imag2;
+public:
+    void getOwn(){
+        cout<<"Derived Complex Number (real imag): ";
+        cin>>real2>>imag2;
+    }
+
+    void showSum(){
+        int r = real1 + real2;
+        int i = imag1 + imag2;
+        cout<<"Sum: "<<r<<" + "<<i<<"i\n";
+    }
+
+    friend class ComplexFriend;
+};
+
+class ComplexFriend {
+public:
+    void showDiff(ComplexDerived cd){
+        int r = cd.real1 - cd.real2;
+        int i = cd.imag1 - cd.imag2;
+        cout<<"Difference: "<<r<<" + "<<i<<"i\n";
+    }
+};
+
+int main(){
+    ComplexDerived cd;
+    ComplexFriend cf;
+
+    cd.getComplex();
+    cd.getOwn();
+    cd.showSum();
+    cf.showDiff(cd);
+
+    return 0;
+}
