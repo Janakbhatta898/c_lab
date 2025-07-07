@@ -1,0 +1,51 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class instrument{
+  protected:
+
+    void strin(){
+        cout<<"the instrument inside string"<<endl;
+        cout<<"veena, guitar, sitar, sarod and mandolin "<<endl;
+    }
+    void wind(){
+        cout<<"the instrument inside wind"<<endl;
+        cout<<"flute, clarinet saxophone, nadhaswaram, and piccolo "<<endl;
+
+
+    }
+    void perc(){
+        cout<<"the instrument inside perc"<<endl;
+        cout<<" tabla, mridangam, bangos, drums and tambour "<<endl;
+
+    }
+
+
+};
+class trial: public instrument {
+    public:
+      string c;
+    void set(){
+
+        strin();wind();
+        perc();
+
+    }
+    void show(){
+        string c;
+        cout<<"which category you want to see(stirng,wind and perc)"<<endl;
+        cin>>c;
+        if(c=="string")strin();
+        else if(c=="wind")wind();
+         else if(c=="perc")perc();
+
+
+    }
+
+};
+int main(){
+    instrument i;
+    trial t;
+    t.set();
+    t.show();
+}
