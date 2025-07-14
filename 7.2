@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+class person{
+public:
+    string s="you did it using virtual class concept";
+
+};
+class employee: virtual public person{
+};
+class student: virtual public person{
+};
+class manager: public employee, public student{
+public:
+    void display(){
+        cout<<s;
+    }
+};
+int main(){
+    person p;
+    employee e;
+    student s;
+    manager m;
+    m.display();
+}
