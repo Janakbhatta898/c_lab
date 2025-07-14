@@ -6,7 +6,7 @@ class vechicle{
     virtual void display(){
 
     }
-    
+
 };
 class car: public vechicle{
     public:
@@ -41,11 +41,22 @@ int main(){
     bus *bsptr;
     bike *bptr;
     cptr=dynamic_cast<car*>(ptr[1]);
+    bsptr=dynamic_cast<bus*>(ptr[1]);
+
     cout<<typeid(*cptr).name()<<endl;
     cout<<typeid(cptr).name()<<endl;
     cout<<typeid(j).name()<<endl;
     cout<<typeid(*ptr[1]).name()<<endl;
-    
+     if(bsptr){
+        cout<<"success"<<endl;
+
+
+    }
+    else{
+        cout<<"failed"<<endl;
+    }
+
 
 }
+
 
