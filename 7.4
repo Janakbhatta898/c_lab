@@ -1,0 +1,51 @@
+#include<iostream>
+#include<typeinfo>
+using namespace std;
+class vechicle{
+    public:
+    virtual void display(){
+
+    }
+    
+};
+class car: public vechicle{
+    public:
+    void display(){
+    }
+
+};
+class bus: public vechicle{
+    public:
+    void display(){
+    }
+
+
+};
+class bike: public vechicle{
+    public:
+    void display(){
+    }
+
+};
+int main(){
+    vechicle v;
+    vechicle *ptr[3];
+    int j;
+    car c;
+    bike b;
+    bus bs;
+    ptr[0]=&b;
+    ptr[1]=&c;
+    ptr[2]=&bs;
+    car *cptr;
+    bus *bsptr;
+    bike *bptr;
+    cptr=dynamic_cast<car*>(ptr[1]);
+    cout<<typeid(*cptr).name()<<endl;
+    cout<<typeid(cptr).name()<<endl;
+    cout<<typeid(j).name()<<endl;
+    cout<<typeid(*ptr[1]).name()<<endl;
+    
+
+}
+
