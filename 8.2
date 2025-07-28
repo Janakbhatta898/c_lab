@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+class overload{
+  private:
+    int r,i;
+  public:
+
+  //overload(int rr=0,int ii=0):r(rr),i(ii){}
+  overload(){
+    r=0;
+    i=0;
+  }
+  friend istream& operator>>(istream& in,overload &l);
+   friend ostream& operator<<(ostream& os,overload &l);
+
+};
+ostream& operator<<(ostream& os, overload& l){
+    os<<l.r<<"+ i"<<l.i;
+    return os;
+
+}
+istream& operator>>(istream& in, overload& l){
+    in>>l.r>>l.i;
+    return in;
+
+}
+int main(){
+    overload o;
+    cout<<"enter the real and imaginarry part :"<<endl;
+    cin>>o;
+    cout<<"the entered complex number is :"<<o;
+}
