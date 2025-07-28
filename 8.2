@@ -1,0 +1,29 @@
+#include<iostream>
+#include<fstream>
+#include <iomanip>
+using namespace std;
+class manipulator{
+    private:
+    int w,p;
+    char f;
+    public:
+    manipulator(int ww=0,int pp=0, char ff='#'){
+          w=ww;
+          p=pp;
+          f=ff;
+    }
+     friend ostream& operator<<(ostream& os,manipulator& m);
+
+
+};
+ostream& operator<<(ostream& os, manipulator& m){
+    os<<setfill(m.f)<<setw(m.w)<<setprecision(m.p);
+    return os;
+}
+int main(){
+
+   float  a=2.67;
+   manipulator m(11,2,'#');
+    cout<<m<<a;
+
+}
