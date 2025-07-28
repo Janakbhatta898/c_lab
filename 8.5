@@ -1,0 +1,171 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class Random {
+private:
+    int an;
+    float b;
+    string lastn;
+    string firstn;
+
+public:
+    void getdata() {
+        cin.ignore(); // Flush buffer
+        cout << "Enter first name: ";
+        getline(cin, firstn);
+        cout << "Enter last name: ";
+        getline(cin, lastn);
+        cout << "Enter account number: ";
+        cin >> an;
+        cout << "Enter balance: ";
+        cin >> b;
+    }
+
+    void showdata() const {
+        if (an == 0)
+            cout << "No account found." << endl;
+        else
+            cout << firstn << "    " << lastn << "    " << an << "    " << b << endl;
+    }
+
+    void accdelete() {
+        an = 0;
+        b = 0;
+        firstn = "";
+        lastn = "";
+    }
+
+    void update() {
+        float newb;
+        cout << "Enter new balance: ";
+        cin >> newb;
+        b = newb;
+    }
+
+    void writeToFile(fstream &file) {
+        size_t len1 = firstn.size();
+        size_t len2 = lastn.size();
+        file.write(reinterpret_cast<char*>(&an), sizeof(an));
+        file.write(reinterpret_cast<char*>(&b), sizeof(b));
+        file.write(reinterpret_cast<char*>(&len1), sizeof(len1));
+        file.write(firstn.c_str(), len1);
+        file.write(reinterpret_cast<char*>(&len2), sizeof(len2));
+        file.write(lastn.c_str(), len2);
+    }
+
+    void readFromFile(fstream &file) {
+        size_t len1, len2;
+        char *buf1, *buf2;
+
+        file.read(reinterpret_cast<char*>(&an), sizeof(an));
+        file.read(reinterpret_cast<char*>(&b), sizeof(b));
+
+        file.read(reinterpret_cast<char*>(&len1), sizeof(len1));
+        buf1 = new char[len1 + 1];
+        file.read(buf1, len1);
+        buf1[len1] = '\0';
+        firstn = buf1;
+        delete[] buf1;
+
+        file.read(reinterpret_cast<char*>(&len2), sizeof(len2));
+        buf2 = new char[len2 + 1];
+        file.read(buf2, len2);
+        buf2[len2] = '\0';
+        lastn = buf2;
+        delete[] buf2;
+    }
+
+    bool isDeleted() const {
+        return an == 0;
+    }
+};
+
+const char* filename = "account.bin";
+
+void writeToFile() {
+    Random r;
+    r.getdata();
+    fstream file(filename, ios::binary | ios::out);
+    if (!file) {
+        cerr << "Error opening file for writing" << endl;
+        return;
+    }
+    r.writeToFile(file);
+    file.close();
+    cout << "Record saved." << endl;
+}
+
+void readFromFile() {
+    Random r;
+    fstream file(filename, ios::binary | ios::in);
+    if (!file) {
+        cerr << "Error opening file for reading" << endl;
+        return;
+    }
+    r.readFromFile(file);
+    file.close();
+    r.showdata();
+}
+
+void deleteRecord() {
+    Random r;
+    fstream file(filename, ios::binary | ios::in | ios::out);
+    if (!file) {
+        cerr << "Error opening file for deleting" << endl;
+        return;
+    }
+    r.readFromFile(file);
+    r.accdelete();
+    file.seekp(0);
+    r.writeToFile(file);
+    file.close();
+    cout << "Record deleted." << endl;
+}
+
+void updateRecord() {
+    Random r;
+    fstream file(filename, ios::binary | ios::in | ios::out);
+    if (!file) {
+        cerr << "Error opening file for updating" << endl;
+        return;
+    }
+    r.readFromFile(file);
+
+    if (r.isDeleted()) {
+        cout << "No account to update." << endl;
+        return;
+    }
+
+    r.update();
+    file.seekp(0);
+    r.writeToFile(file);
+    file.close();
+    cout << "Record updated." << endl;
+}
+
+int main() {
+    int choice;
+    do {
+        cout << "\nMenu:\n";
+        cout << "1. Add Record\n";
+        cout << "2. Delete Record\n";
+        cout << "3. Update Record\n";
+        cout << "4. Display Record\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: writeToFile(); break;
+            case 2: deleteRecord(); break;
+            case 3: updateRecord(); break;
+            case 4: readFromFile(); break;
+            case 5: cout << "Exiting..." << endl; break;
+            default: cout << "Invalid choice." << endl;
+        }
+    } while (choice != 5);
+
+    return 0;
+}
