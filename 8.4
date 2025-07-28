@@ -1,0 +1,64 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+struct Student {
+    string name;
+    int id;
+    string department;
+    string address;
+};
+
+int main() {
+    Student s, out;
+
+    // Input from user
+    cout << "Enter name: ";
+    getline(cin, s.name);
+
+    cout << "Enter ID: ";
+    cin >> s.id;
+    cin.ignore(); // Ignore leftover newline after reading int
+
+    cout << "Enter department: ";
+    getline(cin, s.department);
+
+    cout << "Enter address: ";
+    getline(cin, s.address);
+
+    // Write to file
+    ofstream fout("student.txt");
+    if (!fout) {
+        cerr << "Error opening file for writing." << endl;
+        return 1;
+    }
+    fout << s.name << endl
+         << s.id << endl
+         << s.department << endl
+         << s.address << endl;
+    fout.close();
+
+    // Read from file
+    ifstream fin("student.txt");
+    if (!fin) {
+        cerr << "Error opening file for reading." << endl;
+        return 1;
+    }
+    getline(fin, out.name);
+    string idStr;
+    getline(fin, idStr);
+    out.id = stoi(idStr); // Convert string to int
+    getline(fin, out.department);
+    getline(fin, out.address);
+    fin.close();
+
+    // Display the student info
+    cout << "\n Retrieved Student Info:\n";
+    cout << "Name      : " << out.name << endl;
+    cout << "ID        : " << out.id << endl;
+    cout << "Department: " << out.department << endl;
+    cout << "Address   : " << out.address << endl;
+
+    return 0;
+}
