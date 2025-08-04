@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+void test(int n) {
+    try {
+        if (n == 99)
+            throw 00000000;     // int exception
+        else if (n == 2)
+            throw 'A';    // char exception
+        else
+            throw 3.14;   // unknown (double)
+    }
+    catch (int e) {
+        cout << "Caught int in function: " << e << endl;
+        throw;            // re-throw to main
+    }
+    catch (char e) {
+        cout << "Caught char in function: " << e << endl;
+    }
+    catch (...) {
+        cout << "Caught unknown type in function\n";
+    }
+}
+
+int main() {
+    try {
+        test(99); // Change this to 2 or 3 to test other cases
+    }
+    catch (int e) {
+        cout << "Caught re-thrown int in main: " << e << endl;
+    }
+    catch (...) {
+        cout << "Caught unknown exception in main\n";
+    }
+
+    return 0;
+}
