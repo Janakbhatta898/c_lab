@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int SIZE = 5; 
+
+
+template <class T>
+class Queue {
+    T items[SIZE];   
+    int front, rear;
+
+public:
+    Queue() {
+        front = 0;
+        rear = -1;
+    }
+
+    void insert(T value) {
+        items[++rear] = value; 
+    }
+
+    T remove() {
+        return items[front++]; 
+    }
+
+    void display() {
+        for (int i = front; i <= rear; i++) {
+            cout << items[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    
+    Queue<int> q1;
+    q1.insert(99);
+    q1.insert(88);
+    q1.insert(0);
+    cout << "Integer  Queue: ";
+    q1.display();
+    q1.remove();
+    cout << "result after removing one : ";
+    q1.display();
+
+    
+    Queue<float> q2;
+    q2.insert(0.5f);
+    q2.insert(3.9f);
+    cout << "\nFloat Queue: ";
+    q2.display();
+    q2.remove();
+    cout << "result after removing one : ";
+    q2.display();
+
+
+    Queue<char> q3;
+    q3.insert('t');
+    q3.insert('r');
+    q3.insert('y');
+    cout << "\nChar Queue: ";
+    q3.display();
+    q3.remove();
+    cout << "result after removing one : ";
+    q3.display();
+
+ 
+    Queue<string> q4;
+    q4.insert("janak");
+    q4.insert("Bhatta");
+    cout << "\nString Queue: ";
+    q4.display();
+    q4.remove();
+    cout << "result after removing one : ";
+    q4.display();
+
+    return 0;
+}
